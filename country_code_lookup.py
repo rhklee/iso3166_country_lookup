@@ -1,6 +1,7 @@
 import json
 import argparse
 from typing import List
+import os
 
 
 def parse_args() -> str:
@@ -21,17 +22,17 @@ def pad(num: str) -> str:
 
 def lookup(code: str):
     cs = code.strip().upper()
-    with open('alpha2.json', 'r') as a2:
+    with open(os.path.join(os.path.dirname(__file__), 'alpha2.json'), 'r') as a2:
         alpha2 = json.loads(a2.read())
         if cs in alpha2:
             row_printer(alpha2[cs])
             return
-    with open('alpha3.json', 'r') as a3:
+    with open(os.path.join(os.path.dirname(__file__), 'alpha3.json'), 'r') as a3:
         alpha3 = json.loads(a3.read())
         if cs in alpha3:
             row_printer(alpha3[cs])
             return
-    with open('numeric3.json', 'r') as n3:
+    with open(os.path.join(os.path.dirname(__file__), 'numeric3.json'), 'r') as n3:
         numeric3 = json.loads(n3.read())
         cs_num = pad(cs)
         if cs_num in numeric3:
